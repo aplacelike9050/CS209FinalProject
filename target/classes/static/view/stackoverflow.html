@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StackOverflow</title>
+    <link rel="stylesheet" href="../js/layui-v2.7.6/layui/css/layui.css">
+    <script src="../js/layui-v2.7.6/layui/layui.js"></script>
+    <script src="../js/jquery-3.5.1.js"></script>
+    <script src="../js/echarts.min.js"></script>
+</head>
+
+<body>
+<div>
+    <div style="height: 3px;background-color: #ff5722">
+    </div>
+
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title" style="background-color: #f8f9f9">
+            <img src="../images/ico.jpg" style="height: 40px;width: 200px">
+            <li>Home</li>
+            <li>Number of Answers</li>
+            <li>Accepted Answers</li>
+            <li>Tags</li>
+            <li>Users</li>
+            <li>Frequently discussed</li>
+        </ul>
+
+        <div class="layui-tab-content" style="height: 100px;">
+            <div class="layui-tab-item layui-show">
+                <div style="border-radius: 10px;position: absolute;left: 3%;top: 11%;height: 80%;width: 96%;background-color: rgba(32,32,36,0.94)">
+                    <p style="font-size: 80px;color: #fbffff;position: absolute;left: 20%;top: 20%;">
+                        Welcome to the
+                    </p>
+                    <p style="font-size: 80px;color: #eb7350;position: absolute;left: 20%;top: 40%;">
+                        stackoverflow
+                    </p>
+                    <p style="font-size: 80px;color: #fbffff;position: absolute;left: 20%;top: 60%;">
+                        data presentation!
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="layui-tab-item">
+                <!--Number of Answers-->
+                <div style="display: flex;">
+                    <div style="width: 33%;height: 800px;background-color: red;opacity: 0.5"></div>
+                    <div style="width: 33%;height: 800px;background-color: greenyellow;opacity: 0.5"></div>
+                    <div style="width: 34%;height: 800px;background-color: #757f7d;opacity: 0.5"></div>
+
+                    <div>
+                        <p style="position: absolute;left: 6%;top:25%;font-size: 24px">没有答案的 questions 的百分比</p>
+                        <div id="n1" style="width: 430px;height:300px;position: absolute;left: 5%;top:32%;"></div>
+                    </div>
+
+                    <div>
+                        <p style="position: absolute;left: 40%;top:25%;font-size: 24px">answer 数量的平均值和最大值</p>
+                        <div id="n2" style="display: flex;">
+                            <span class="layui-badge"
+                                  style="position: absolute;left: 43%;top:45%;width: 100px;height: 100px;font-size: 44px">
+                                <p id="data121" style="position: absolute;top:40%;left: 40%"></p>
+                            </span>
+                            <span class="layui-badge layui-bg-green"
+                                  style="position: absolute;left: 53%;top:45%;width: 100px;height: 100px;font-size: 44px">
+                                <p id="data122" style="position: absolute;top:40%;left: 10%"></p>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p style="position: absolute;left: 79%;top:25%;font-size: 24px">answer 数的分布</p>
+                        <div id="n3" style="width: 400px;height:300px;position: absolute;left: 72%;top:38%;"></div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="layui-tab-item">
+                <!--Accepted Answers-->
+                <div style="display: flex;">
+                    <div style="width: 33%;height: 800px;background-color: #ffb1d9;opacity: 0.5"></div>
+                    <div style="width: 33%;height: 800px;background-color: #6ae4ff;opacity: 0.5"></div>
+                    <div style="width: 34%;height: 800px;background-color: #7f7119;opacity: 0.5"></div>
+
+                    <div>
+                        <p style="position: absolute;left: 4%;top:25%;font-size: 24px">有 accepted answer 的问题的百分比</p>
+                        <div id="a1" style="width: 400px;height:300px;position: absolute;left: 5%;top:32%;"></div>
+                    </div>
+
+                    <div>
+                        <p style="position: absolute;left: 37%;top:25%;font-size: 24px">问题从提出到解决的时间间隔分布</p>
+                        <div id="a2" style="width: 400px;height:300px;position: absolute;left: 38%;top:38%;"></div>
+                    </div>
+
+                    <div>
+                        <p style="position: absolute;left: 68%;top:25%;font-size: 24px">展示含有 non-accepted answer 的
+                            upvote 数高于 accepted
+                            answer 的问题的百分比</p>
+                        <div id="a3" style="width: 400px;height:300px;position: absolute;left: 72%;top:38%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-tab-item">
+                <!--Tags-->
+                <div style="display: flex;">
+                    <div style="width: 33%;height: 800px;background-color: #6aff9f;opacity: 0.5"></div>
+                    <div style="width: 33%;height: 800px;background-color: #0c7cff;opacity: 0.5"></div>
+                    <div style="width: 34%;height: 800px;background-color: #27247f;opacity: 0.5"></div>
+
+                    <div>
+                        <p style="position: absolute;left: 3%;top:25%;font-size: 24px">哪些 tags 经常和 Java tag 一起出现</p>
+                        <div id="t1" style="width: 400px;height:300px;position: absolute;left: 5%;top:32%;"></div>
+                    </div>
+
+                    <div>
+                        <p style="position: absolute;left: 36%;top:25%;font-size: 24px">tags 或 tag 的组合得到最多的 upvotes</p>
+                        <div id="t2" style="width: 400px;height:300px;position: absolute;left: 40%;top:32%;">
+                        </div>
+                    </div>
+
+                    <div>
+                        <p style="position: absolute;left: 69%;top:25%;font-size: 24px">哪些 tags 或 tag 的组合得到最多的 views</p>
+                        <div id="t3" style="width: 400px;height:300px;position: absolute;left: 72%;top:38%;"></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="layui-tab-item">
+                <!--Users-->
+                <div style="display: flex;">
+                    <div style="width: 33%;height: 800px;background-color: #96c8ff;opacity: 0.5"></div>
+                    <div style="width: 33%;height: 800px;background-color: #1bffd3;opacity: 0.5"></div>
+                    <div style="width: 34%;height: 800px;background-color: #7f3b3d;opacity: 0.5"></div>
+
+                    <div>
+                        <p style="position: absolute;left: 3%;top:25%;font-size: 24px">参与 Thread 讨论的用户数量的分布</p>
+                        <div id="u1" style="width: 400px;height:300px;position: absolute;left: 5%;top:32%;"></div>
+                    </div>
+
+                    <div>
+                        <p style="position: absolute;left: 35%;top:25%;font-size: 24px">从问题评论者角度进行统计</p>
+                        <div id="u2" style="width: 400px;height:300px;position: absolute;left: 35%;top:38%;">
+                        </div>
+                    </div>
+
+                    <div>
+                        <p style="position: absolute;left: 69%;top:25%;font-size: 24px">从问题回答者角度进行统计</p>
+                        <div id="u3" style="width: 400px;height:300px;position: absolute;left: 72%;top:38%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-tab-item">
+                <!--Frequently discussed-->
+                <div style="display: flex;">
+
+                    <div style="width: 100%;height: 800px;background-color: #acff0e;opacity: 0.5"></div>
+
+                    <div>
+                        <p style="position: absolute;left: 30%;top:25%;font-size: 24px">哪些 Java APIs 在 Stack Overflow
+                            上最频繁被讨论</p>
+                        <div id="f1" style="width: 400px;height:300px;position: absolute;left: 5%;top:32%;">
+                            <p style="font-size: 50px;color: #27247f;margin-left: 600px;margin-top: 150px">
+                                Loading...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<script>
+    $.get("http://127.0.0.1:8080/1/answers?status=no-answers", function (res) {
+    });
+
+
+    //************************1**************************
+    $.get("http://127.0.0.1:8080/1/questions?status=no-answers", function (res) {
+        //没有答案的 questions 的百分比
+        var pie11 = echarts.init(document.getElementById('n1'));
+        //占比数字
+        let per11 = res.value;
+        let color11 = [
+            new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {offset: 0, color: "#0e10fd"},
+                {offset: 1, color: "#3e8381"},
+            ]),
+            '#f1f1f1',
+        ];
+        var pieOption11 = {
+            color: color11,
+            series: [
+                {
+                    type: 'pie',
+                    radius: ['50%', '80%'],
+                    hoverAnimation: false,
+                    avoidLabelOverlap: false,
+                    data: [
+                        {value: per11, name: 'per'},
+                        {value: 100 - per11, name: 'total'},
+                    ],
+                    label: {
+                        show: true,
+                        formatter: function (d) {
+                            if (d.data.name == 'per') {
+                                return `{value|${per11}%}`
+                            } else {
+                                return ''
+                            }
+                        },
+                        rich: {
+                            value: {
+                                fontSize: 18,
+                                color: color11[0]
+                            }
+                        }
+                    }
+                }
+            ]
+        };
+        pie11.setOption(pieOption11);
+    });
+
+
+    //answer 数量的平均值和最大值
+    $.get("http://127.0.0.1:8080/1/questions?status=avg-answers", function (res) {
+        var data121 = res.maxValue;
+        var data122 = res.meanValue + "";
+        console.log(data122)
+        $("#data121").text(data121);
+        $("#data122").text(data122);
+    });
+
+
+    //answer 数的分布
+    $.get("http://127.0.0.1:8080/1/questions?status=distribution-answers", function (res) {
+        var pie13 = echarts.init(document.getElementById('n3'));
+        var pieOption13 = {
+            title: {
+                text: '',
+                subtext: '',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+            },
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: '50%',
+                    data: res,
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        pie13.setOption(pieOption13);
+    });
+
+
+    //************************2**************************
+    $.get("http://127.0.0.1:8080/1/answers?status=accepted", function (res) {
+        //有 accepted answer 的问题的百分比
+        var pie21 = echarts.init(document.getElementById('a1'));
+        //占比数字
+        let per21 = res.value;
+        let color21 = [
+            new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {offset: 0, color: "#09fd00"},
+                {offset: 1, color: "#4b6d83"},
+            ]),
+            '#e6e2f1',
+        ];
+        var pieOption21 = {
+            color: color21,
+            series: [
+                {
+                    type: 'pie',
+                    radius: ['50%', '80%'],
+                    hoverAnimation: false,
+                    avoidLabelOverlap: false,
+                    data: [
+                        {value: per21, name: 'per'},
+                        {value: 100 - per21, name: 'total'},
+                    ],
+                    label: {
+                        show: true,
+                        formatter: function (d) {
+                            if (d.data.name == 'per') {
+                                return `{value|${per21}%}`
+                            } else {
+                                return ''
+                            }
+                        },
+                        rich: {
+                            value: {
+                                fontSize: 18,
+                                color: color21[0]
+                            }
+                        }
+                    }
+                }
+            ]
+        };
+        pie21.setOption(pieOption21);
+    });
+
+
+    //问题从提出到解决的时间间隔分布
+    $.get("http://127.0.0.1:8080/1/answers?status=distribution-accepted", function (res) {
+        var pink22 = echarts.init(document.getElementById('a2'));
+        var pink22option = {
+            title: {
+                text: '',
+                subtext: '',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+            },
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: '50%',
+                    data: res,
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        pink22.setOption(pink22option);
+    });
+
+
+    $.get("http://127.0.0.1:8080/1/answers?status=unaccepted", function (res) {
+        //展示含有 non-accepted answer 的 upvote 数高于 accepted answer 的问题的百分比
+        var pie23 = echarts.init(document.getElementById('a3'));
+        //占比数字
+        let per23 = res.value;
+        let color23 = [
+            new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {offset: 0, color: "#fd000f"},
+                {offset: 1, color: "#d6ff08"},
+            ]),
+            '#e6e2f1',
+        ];
+        var pieOption23 = {
+            color: color23,
+            series: [
+                {
+                    type: 'pie',
+                    radius: ['50%', '80%'],
+                    hoverAnimation: false,
+                    avoidLabelOverlap: false,
+                    data: [
+                        {value: per23, name: 'per'},
+                        {value: 100 - per23, name: 'total'},
+                    ],
+                    label: {
+                        show: true,
+                        formatter: function (d) {
+                            if (d.data.name == 'per') {
+                                return `{value|${per23}%}`
+                            } else {
+                                return ''
+                            }
+                        },
+                        rich: {
+                            value: {
+                                fontSize: 18,
+                                color: color23[0]
+                            }
+                        }
+                    }
+                }
+            ]
+        };
+        pie23.setOption(pieOption23);
+    });
+
+
+    //************************3**************************
+    $.get("http://127.0.0.1:8080/1/tags?status=often", function (res) {
+        //展示哪些 tags 经常和 Java tag 一起出现
+        var pie31 = echarts.init(document.getElementById('t1'));
+        var pieOption31 = {
+            title: {
+                text: '',
+                subtext: '',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+            },
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: '50%',
+                    data: res,
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        pie31.setOption(pieOption31);
+    });
+
+
+    $.get("http://127.0.0.1:8080/1/tags?status=votes", function (res) {
+        //展示哪些 tags 或 tag 的组合得到最多的 upvotes
+        var pie32 = echarts.init(document.getElementById('t2'));
+        var pieOption32 = {
+            title: {
+                text: '',
+                subtext: '',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+            },
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: '50%',
+                    data: res,
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        pie32.setOption(pieOption32);
+    });
+
+    $.get("http://127.0.0.1:8080/1/tags?status=views", function (res) {
+        //展示哪些 tags 或 tag 的组合得到最多的 views
+        var pie33 = echarts.init(document.getElementById('t3'));
+        var pieOption33 = {
+            xAxis: {
+                type: 'category',
+                data: res.x
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: res.y,
+                type: 'bar',
+                label: {
+                    show: true,
+                    position: 'top'
+                },
+            }]
+        };
+        pie33.setOption(pieOption33);
+    });
+
+
+
+    //************************4**************************
+    $.get("http://127.0.0.1:8080/1/users?status=distribution", function (res) {
+        //参与 Thread 讨论的用户数量的分布
+        var pie41 = echarts.init(document.getElementById('u1'));
+        var pieOption41 = {
+            title: {
+                text: '',
+                subtext: '',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+            },
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: '50%',
+                    data: res,
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        pie41.setOption(pieOption41);
+    });
+
+
+    $.get("http://127.0.0.1:8080/1/users?status=most-active", function (res) {
+        //从 问 题 回 答 者 (who post answers) 和 评 论 者 (who post comment)两个角度进行统计
+        var pie42 = echarts.init(document.getElementById('u2'));
+        var pieOption42 = {
+            xAxis: {
+                type: 'category',
+                data: res.userIds
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: res.questionsCounts,
+                type: 'bar',
+                label: {
+                    show: true,
+                    position: 'top'
+                },
+            }]
+        };
+        pie42.setOption(pieOption42);
+
+        var pie43 = echarts.init(document.getElementById('u3'));
+        var pieOption43 = {
+            xAxis: {
+                type: 'category',
+                data: res.userIds
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: res.answersCounts,
+                type: 'bar',
+                label: {
+                    show: true,
+                    position: 'top'
+                },
+            }]
+        };
+        pie43.setOption(pieOption43);
+    });
+
+
+    $.get("http://127.0.0.1:8080/1/users?status=most-active", function (res) {
+        //从 问 题 回 答 者 (who post answers) 和 评 论 者 (who post comment)两个角度进行统计
+        var pie42 = echarts.init(document.getElementById('u2'));
+        var pieOption42 = {
+            xAxis: {
+                type: 'category',
+                data: res.userIds
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: res.questionsCounts,
+                type: 'bar',
+                label: {
+                    show: true,
+                    position: 'top'
+                },
+            }]
+        };
+        pie42.setOption(pieOption42);
+
+        var pie43 = echarts.init(document.getElementById('u3'));
+        var pieOption43 = {
+            xAxis: {
+                type: 'category',
+                data: res.userIds
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: res.answersCounts,
+                type: 'bar',
+                label: {
+                    show: true,
+                    position: 'top'
+                },
+            }]
+        };
+        pie43.setOption(pieOption43);
+    });
+
+
+</script>
+
+</body>
+
+</html>
